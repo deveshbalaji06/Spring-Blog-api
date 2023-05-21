@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.awt.print.Pageable;
@@ -19,6 +20,7 @@ public class PostController {
     public PostController(PostService postService) {
         this.postService = postService;
     }
+    @PreAuthorize("hasRole('admin')")
     @PostMapping
     public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto)
     {
@@ -39,11 +41,13 @@ public class PostController {
         return ResponseEntity.ok(postService.getPostById(id));
 
     }
+    @PreAuthorize("hasRole('admin')")
     @PutMapping ("/{id}")
      public ResponseEntity<PostDto> updatedPost(@RequestBody PostDto postDto,@PathVariable(name="id") long id )
      {
          return ResponseEntity.ok(postService.updatePost(postDto,id));
      }
+    @PreAuthorize("hasRole('admin')")
      @DeleteMapping("/{id}")
      public  ResponseEntity<String> deletePost(@PathVariable(name="id") long id)
      {
