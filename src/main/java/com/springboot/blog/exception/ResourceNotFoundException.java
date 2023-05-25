@@ -2,12 +2,12 @@ package com.springboot.blog.exception;
 
 public class ResourceNotFoundException extends  RuntimeException{
     private String resourceName;
-    private String fieldName;
+    private long fieldName;
     private String fieldValue;
 
 
 
-    public ResourceNotFoundException(String resourceName, String fieldValue,String fieldName) {
+    public ResourceNotFoundException(String resourceName, String fieldValue, long fieldName) {
         super(String.format("%s not found with %s : '%s'",resourceName,fieldName,fieldValue));
         this.resourceName = resourceName;
         this.fieldValue = fieldValue;
@@ -18,7 +18,7 @@ public class ResourceNotFoundException extends  RuntimeException{
         return resourceName;
     }
 
-    public String getFieldName() {
+    public long getFieldName() {
         return fieldName;
     }
 

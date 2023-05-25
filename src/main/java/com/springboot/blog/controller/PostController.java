@@ -30,8 +30,6 @@ public class PostController {
     @GetMapping
     public List<PostDto> getAllpost(@RequestParam(value = "pageNo" , defaultValue = "0" ,required = false) int pageNo,@RequestParam(value = "pageSize" ,defaultValue = "10" ,required = false ) int pageSize )
     {
-
-
          return postService.getAllposts(pageNo,pageSize);
     }
     @GetMapping("/{id}")
@@ -41,7 +39,7 @@ public class PostController {
         return ResponseEntity.ok(postService.getPostById(id));
 
     }
-    @PreAuthorize("hasRole('admin')")
+   @PreAuthorize("hasRole('admin')")
     @PutMapping ("/{id}")
      public ResponseEntity<PostDto> updatedPost(@RequestBody PostDto postDto,@PathVariable(name="id") long id )
      {
